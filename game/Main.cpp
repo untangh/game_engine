@@ -1,21 +1,20 @@
 
 #include<iostream>
-#include "classes.h"
-#include "FPS_temp.h"
-#include<GL/glut.h>
+#include "class.h"
+#include "fps_temp.h"
 
 character main_char;
 enemy enem;
 
-FPS_temp *fps = new FPS_temp(60);
+fpsTemp *fps = new fpsTemp(60);
 
 //描画用
 void display(void) {
 	glClear(GL_COLOR_BUFFER_BIT);
-	if (main_char.up_flag) main_char.move(0, -main_char.speed);
-	if (main_char.right_flag) main_char.move(main_char.speed, 0);
-	if (main_char.down_flag) main_char.move(0, main_char.speed);
-	if (main_char.left_flag) main_char.move(-main_char.speed, 0);
+	if (main_char.isUpMove) main_char.move(0, -main_char.speed);
+	if (main_char.isRightMove) main_char.move(main_char.speed, 0);
+	if (main_char.isDownMove) main_char.move(0, main_char.speed);
+	if (main_char.isLeftMove) main_char.move(-main_char.speed, 0);
 	main_char.draw();
 	enem.move();
 	enem.draw();
@@ -31,8 +30,8 @@ void resize(int w, int h) {
 //暇な時はコマ送りで描画を更新(アニメーション)
 void idle() {
 	fps->GetFPS();
-	if(fps -> draw)
-	glutPostRedisplay();
+	if (fps->draw)
+		glutPostRedisplay();
 }
 
 void init() {
@@ -71,18 +70,18 @@ void motion(int x, int y)
 
 void keyboard(unsigned char key, int x, int y) {
 	//std::cout << "key=" << key << " x=" << x << " y=" << y << std::endl;
-	if (key == 'd') main_char.right_flag = true;
-	if (key == 'a') main_char.left_flag = true;
-	if (key == 'w') main_char.up_flag = true;
-	if (key == 's') main_char.down_flag = true;
+	if (key == 'd') main_char.isRightMove = true;
+	if (key == 'a') main_char.isLeftMove = true;
+	if (key == 'w') main_char.isUpMove = true;
+	if (key == 's') main_char.isDownMove = true;
 	//glutIdleFunc(idle);
 }
 
 void keyboard_up(unsigned char key, int x, int y) {
-	if (key == 'w') main_char.up_flag = false;
-	if (key == 'd') main_char.right_flag = false;
-	if (key == 's') main_char.down_flag = false;
-	if (key == 'a') main_char.left_flag = false;
+	if (key == 'w') main_char.isUpMove = false;
+	if (key == 'd') main_char.isRightMove = false;
+	if (key == 's') main_char.isDownMove = false;
+	if (key == 'a') main_char.isLeftMove = false;
 	//glutIdleFunc(0);
 }
 

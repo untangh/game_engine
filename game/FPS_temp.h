@@ -9,7 +9,7 @@ using namespace std;
 #define CPUMax 30000
 #define CPUMin 10000
 
-class FPS_temp{
+class fpsTemp{
 public:
 	int LoopCount, Frame, sleep, Skip, FrameSkip, Fps, CurrentFps;
 	bool draw;
@@ -17,14 +17,14 @@ public:
 	UL Time, Oldtime;
 	float FrameTime, FrameTimeO;
 
-	FPS_temp(int);
+	fpsTemp(int);
 	void SetFPS(int);
 	void GetFPS();
 private:
 	char buf[255];
 };
 
-FPS_temp::FPS_temp(int fps) {
+fpsTemp::fpsTemp(int fps) {
 	draw = false;
 	LoopCount = 0;
 	Frame = 0;
@@ -38,13 +38,13 @@ FPS_temp::FPS_temp(int fps) {
 	Oldtime = 0; //Ç»ÇÒÇ‚Ç±ÇÍ
 }
 
-void FPS_temp::SetFPS(int fps) {
+void fpsTemp::SetFPS(int fps) {
 	Fps = fps;
 	FrameTime = 1000.0 / fps - 0.000001f; //1ÉtÉåÅ[ÉÄÇÃéûä‘
 	FrameTimeO = 1000.0 / fps + 0.000001f; Fps = fps;
 }
 
-void FPS_temp::GetFPS() {
+void fpsTemp::GetFPS() {
 	draw = false;
 	LoopCount++;
 	Time = timeGetTime();
